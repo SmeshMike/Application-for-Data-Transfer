@@ -32,7 +32,7 @@ namespace UI
                 foreach (var fileName in ofd.FileNames)
                 {
                     if (filesTextBox.Text.Length == 0)
-                        filesTextBox.Text = Path.GetDirectoryName(fileName);
+                        filesTextBox.Text = fileName;
                     else
                         filesTextBox.AppendText("\r\n" + fileName);
                     _paths.Add(fileName);

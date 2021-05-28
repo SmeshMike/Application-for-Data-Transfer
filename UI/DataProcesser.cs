@@ -13,28 +13,30 @@ namespace UI.DataProcesser
 
         public void GetRowsFromDocx()
         {
-            Microsoft.Office.Interop.Word.Application word = new Microsoft.Office.Interop.Word.Application();
-            Microsoft.Office.Interop.Word.Document doc = new Microsoft.Office.Interop.Word.Document();
-            string filePath = "";
-            object fileName = Paths[0];
-            // Define an object to pass to the API for missing parameters
-            object missing = System.Type.Missing;
-            doc = word.Documents.Open(ref fileName,
-                    ref missing, ref missing, ref missing, ref missing,
-                    ref missing, ref missing, ref missing, ref missing,
-                    ref missing, ref missing, ref missing, ref missing,
-                    ref missing, ref missing, ref missing);
-
-            string read = string.Empty;
-            List<string> data = new List<string>();
-            for (int i = 0; i < doc.Paragraphs.Count; i++)
+            foreach (var path in Paths)
             {
-                string temp = doc.Paragraphs[i + 1].Range.Text.Trim();
-                if (temp != string.Empty)
-                    data.Add(temp);
+                var word = new Microsoft.Office.Interop.Word.Application();
+                object objPath = path;
+                // Define an object to pass to the API for missing parameters
+                var missing = Type.Missing;
+                var doc = word.Documents.Open(ref objPath,
+                        ref missing, ref missing, ref missing, ref missing,
+                        ref missing, ref missing, ref missing, ref missing,
+                        ref missing, ref missing, ref missing, ref missing,
+                        ref missing, ref missing, ref missing);
+
+                var read = string.Empty;
+                var data = new List<string>();
+                for (int i = 0; i < doc.Paragraphs.Count; i++)
+                {
+                    var temp = doc.Paragraphs[i + 1].Range.Text.Trim();
+                    if (temp != string.Empty)
+                        data.Add(temp);
+                }
+                ((Microsoft.Office.Interop.Word._Document)doc).Close();
+                ((Microsoft.Office.Interop.Word._Application)word).Quit();
             }
-            ((Microsoft.Office.Interop.Word._Document)doc).Close();
-            ((Microsoft.Office.Interop.Word._Application)word).Quit();
+            
         }
     }
 }
