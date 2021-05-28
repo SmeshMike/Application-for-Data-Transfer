@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection.Metadata;
 using System.Text;
 using Microsoft.Office.Interop.Excel;
 using Microsoft.Office.Interop.Word;
@@ -8,7 +7,7 @@ using Microsoft.Office.Interop.Word;
 
 namespace UI.DataProcesser
 {
-    public class DataProcesser
+    public class DocumetProcesser
     {
         public List<string> Paths { get; set; }
 
@@ -17,7 +16,7 @@ namespace UI.DataProcesser
             Microsoft.Office.Interop.Word.Application word = new Microsoft.Office.Interop.Word.Application();
             Microsoft.Office.Interop.Word.Document doc = new Microsoft.Office.Interop.Word.Document();
             string filePath = "";
-            object fileName = filePath;
+            object fileName = Paths[0];
             // Define an object to pass to the API for missing parameters
             object missing = System.Type.Missing;
             doc = word.Documents.Open(ref fileName,

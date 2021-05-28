@@ -8,21 +8,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using UI.DataProcesser;
 
 namespace UI
 {
-    public partial class MainUserForm : Form
+    public partial class MainForm : Form
     {
         private List<string> _paths;
-        public MainUserForm()
+        public MainForm()
         {
             InitializeComponent();
-        }
-
-        private void ProcessSettingsButtonClick(object sender, EventArgs e)
-        {
-            var settingsForm = new SettinsForm();
-            settingsForm.Show();
         }
 
         private void ProcessSetFilesButton(object sender, EventArgs e)
@@ -44,16 +39,23 @@ namespace UI
                 }
 
             }
+            
         }
 
+        private void ProcessSettingsButtonClick(object sender, EventArgs e)
+        {
+            var settingsForm = new SettingsForm();
+            settingsForm.Show();
+        }
         private void TransferDataButtonClick(object sender, EventArgs e)
         {
-            var dp = new DataProcesser.DataProcesser {Paths = _paths};
+            var dp = new DocumetProcesser() { Paths = _paths };
             foreach (var path in _paths)
             {
                 dp.GetRowsFromDocx();
             }
-            
         }
+
+        
     }
 }

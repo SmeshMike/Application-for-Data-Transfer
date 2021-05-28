@@ -4,15 +4,17 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace UI
 {
-    public partial class SettinsForm : Form
+    public partial class SettingsForm : Form
     {
         string path = @$"{Directory.GetCurrentDirectory()}\tablepath.txt";
-        public SettinsForm()
+        public SettingsForm()
         {
             InitializeComponent();
         }
@@ -31,7 +33,6 @@ namespace UI
                     File.WriteAllText(path, ofd.SafeFileName);
                 }
             }
-
         }
 
         private void ProcessSettinsFormLoad(object sender, EventArgs e)
